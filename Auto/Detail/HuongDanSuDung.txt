@@ -1,0 +1,20 @@
+================================================================================
+   HUONG DAN SU DUNG ZEBRA USB PRINT BRIDGE (PORT 8021)
+================================================================================
+
+1. CONG DUNG:
+   - Lam cau noi trung gian giua trinh duyet web va may in Zebra cam cap USB.
+   - Giup web in truc tiep tem ZPL xuong may in USB qua cong 8021.
+
+2. CÁC FILE CHÍNH (Ở THƯ MỤC NGOÀI bat\Manual):
+   - start.bat     : Bấm đúp file này để tự động mở cổng 8021 và cài tự khởi động cùng Windows.
+   - uninstall.bat : Bấm đúp file này để tắt dịch vụ và gỡ khỏi khởi động cùng Windows.
+
+3. CÁC FILE CHI TIẾT (TRONG THƯ MỤC bat\Manual\Detail):
+   - setup_bridge.ps1      : Script cài đặt Startup và kích hoạt chạy ngầm.
+   - uninstall_bridge.ps1  : Script gỡ Startup và dừng tiến trình.
+   - run_hidden.vbs        : VBScript kích hoạt chạy ngầm không hiện cửa sổ đen.
+   - print_bridge.ps1      : Mã nguồn chính xử lý in ZPL qua WinSpool API.
+   - run_debug_console.bat : Dùng khi muốn mở cửa sổ đen xem log in ấn trực tiếp.
+   - stop_usb_bridge.bat   : Dừng nhanh tiến trình cổng 8021.
+================================================================================

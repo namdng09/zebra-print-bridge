@@ -1,0 +1,34 @@
+================================================================================
+   HƯỚNG DẪN SỬ DỤNG ZEBRA USB PRINT BRIDGE (PORT 8021)
+================================================================================
+
+1. CÔNG DỤNG:
+   - Làm cầu nối trung gian giữa trình duyệt web và máy in Zebra cắm dây USB.
+   - Giúp web in trực tiếp tem ZPL xuống máy in USB mà không cần cài Node.js,
+     không cần cấu hình phức tạp.
+
+2. CÁC FILE TRONG THƯ MỤC NÀY:
+   - run_usb_bridge.bat   : Nhấp đúp vào file này để KHỞI ĐỘNG bridge.
+   - stop_usb_bridge.bat  : Nhấp đúp vào file này nếu muốn DỪNG/TẮT bridge.
+   - print_bridge.ps1     : Mã nguồn xử lý in ngầm qua WinSpool API (không xóa).
+
+3. CÁCH SỬ DỤNG TRÊN WEB:
+   Bước 1: Cắm dây cáp USB từ máy in Zebra vào máy tính, bật nguồn máy in.
+   Bước 2: Nhấp đúp vào file "run_usb_bridge.bat".
+           (Một cửa sổ màu đen hiện lên thông báo "Dịch vụ đang chạy tại: http://localhost:8021/")
+           LƯU Ý: Giữ cửa sổ này mở trong suốt ca làm việc.
+   Bước 3: Mở trang web in tem:
+           - Bấm phím "Numpad 9" để mở Cấu hình máy in.
+           - Chọn chế độ in: "USB" (icon cắm điện).
+           - Biểu tượng localhost:8021 sẽ sáng XANH (Online).
+           - Bấm nút "🔄 Làm mới" để tải danh sách máy in.
+           - Chọn máy in Zebra của bạn (ví dụ: ZDesigner ZT610...).
+           - Bấm "Lưu cấu hình".
+   Bước 4: Quét barcode hoặc bấm in tem bình thường!
+
+4. MẸO (CHO MÁY TỰ ĐỘNG CHẠY KHI MỞ MÁY TÍNH):
+   - Nhấn tổ hợp phím Windows + R, gõ: shell:startup rồi nhấn Enter.
+   - Nhấp chuột phải vào file "run_usb_bridge.bat" -> Create shortcut (Tạo lối tắt).
+   - Kéo shortcut đó thả vào thư mục Startup vừa mở.
+   - Từ nay mỗi khi bật máy tính, bridge sẽ tự động chạy sẵn!
+================================================================================

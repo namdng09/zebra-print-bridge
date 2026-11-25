@@ -1,0 +1,55 @@
+================================================================================
+   HUONG DAN SU DUNG ZEBRA PRINT BRIDGE CHO RASPBERRY PI OS (PORT 8021)
+================================================================================
+
+1. CONG DUNG:
+   - Lam cau noi trung gian giua trinh duyet web va may in Zebra cam cap USB hoac mang LAN.
+   - Giup ung dung web (PrintAppLine) in truc tiep tem ZPL xuong may in qua cong 8021.
+   - Thiet ke dac thu chay cuc nhe, on dinh tren Raspberry Pi OS (Debian Linux).
+   - Su dung 100% Python 3 co san tren Raspberry Pi OS (khong can cai them pip).
+   - Co co che tu dong giai phong cong 8021, khong lo bi loi "Address already in use".
+
+2. CACH CAI DAT VA SU DUNG TREN RASPBERRY PI:
+
+   Buoc 1: Chep thu muc 'Raspberry' nay vao Raspberry Pi (vi du vao ~/Raspberry).
+   
+   Buoc 2: Mo Terminal tren Raspberry Pi va di chuyen vao thu muc:
+           cd ~/Raspberry
+
+   Buoc 3: Chay lenh cai dat tu dong:
+           bash setup.sh
+           
+           -> Script se tu dong:
+              + Cap quyen doc/ghi USB khong can root (udev rule /dev/usb/lp*).
+              + Them user vao group 'lp'.
+              + Don dep cong 8021 truoc khi bat service.
+              + Dang ky dich vu 'zebra-bridge.service' vao systemd co ExecStartPre chay free_port.sh.
+              + Tu dong chay ngam ngay lap tuc va tu khoi dong moi khi bat Raspberry Pi.
+
+   Buoc 4: Kiem tra trang thai va ket noi:
+           systemctl is-active zebra-bridge
+           curl -s http://127.0.0.1:8021/health
+
+3. CAC FILE VA CHUC NANG TRONG THU MUC:
+   - setup.sh           : Script 1-click cai dat systemd service & phan quyen USB.
+   - free_port.sh       : Giai phong cong 8021, tat instance cu truoc khi service start/restart.
+   - uninstall.sh       : Go bo dich vu va giai phong cong 8021.
+   - run_debug.sh       : Mo bridge che do truc quan (xem log in an truc tiep tren Terminal).
+   - stop.sh            : Dung nhanh tien trinh bridge (dung ca systemd lan tien trinh chay tay).
+   - print_bridge.py    : Core HTTP server (tu dong tat instance cu, thu lai 8 lan, bao ro PID neu app khac chiem cong).
+
+4. CAC LENH SYSTEMD TIEN ICH (QUAN LY DICH VU):
+   - Kiem tra trang thai :  sudo systemctl status zebra-bridge
+   - Kiem tra dang chay  :  systemctl is-active zebra-bridge
+   - Kiem tra API        :  curl -s http://127.0.0.1:8021/health
+   - Khoi dong lai       :  sudo systemctl restart zebra-bridge
+   - Tam dung            :  sudo systemctl stop zebra-bridge
+   - Xem log hoat dong   :  sudo journalctl -u zebra-bridge -f
+
+5. KIEM TRA KET NOI MAY IN USB ZEBRA:
+   - Khi cam may in Zebra vao cong USB cua Raspberry Pi, kiem tra thiet bi bang lenh:
+     ls -l /dev/usb/lp*
+     (Ket qua thuong la /dev/usb/lp0 voi quyen crw-rw-rw-)
+   - Trinh duyet web truy cap he thong se tu dong hien 'localhost:8021 — Online'
+     va liet ke ten may in Zebra trong muc in USB.
+================================================================================

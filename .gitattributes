@@ -1,0 +1,2 @@
+# Giữ nguyên từng byte như bản gốc, không để git tự đổi kiểu xuống dòng (CRLF/LF) khi clone trên Windows
+* -text
